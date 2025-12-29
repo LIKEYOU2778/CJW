@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>趁截文辅导班 | CJW ACADEMY - 精准文学逻辑</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-ink: #1e293b; 
+            --accent-blue: #475569;
+            --light-slate: #f8fafc;
+            --border-soft: #e2e8f0;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --bg-white: #ffffff;
+        }
+
+        /* 全局字号缩小，增加字间距 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 13px; scroll-behavior: smooth; } 
+
+        body {
+            font-family: 'Montserrat', 'Noto Serif SC', serif;
+            background-color: var(--bg-white);
+            color: var(--text-main);
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { width: 85%; max-width: 1100px; margin: 0 auto; }
+
+        /* 导航 */
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+        .logo { font-family: 'Noto Serif SC'; font-weight: 700; font-size: 1rem; letter-spacing: 4px; color: var(--primary-ink); text-decoration: none; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-size: 0.7rem; letter-spacing: 1px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent-blue); }
+
+        /* 通用标题 */
+        .section-header { margin-bottom: 60px; }
+        .section-header span { font-size: 0.65rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 5px; display: block; margin-bottom: 8px; }
+        .section-header h2 { font-family: 'Noto Serif SC'; font-size: 1.6rem; font-weight: 500; color: var(--primary-ink); }
+
+        /* 1. 首页 (Hero) */
+        #hero { height: 95vh; display: flex; align-items: center; background: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%); }
+        .hero-content { max-width: 550px; }
+        .hero-content h1 { font-family: 'Noto Serif SC'; font-size: 2.6rem; line-height: 1.3; color: var(--primary-ink); margin-bottom: 25px; font-weight: 500; }
+        .hero-content p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 35px; line-height: 2; }
+        .btn-ghost { padding: 10px 30px; border: 1px solid var(--primary-ink); font-size: 0.7rem; color: var(--primary-ink); text-decoration: none; transition: 0.4s; letter-spacing: 2px; }
+        .btn-ghost:hover { background: var(--primary-ink); color: white; }
+
+        /* 2. 哲学 (Philosophy) */
+        section { padding: 120px 0; border-bottom: 1px solid var(--border-soft); }
+        .phi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
+        .phi-item h3 { font-size: 0.9rem; margin-bottom: 15px; font-weight: 600; color: var(--primary-ink); }
+        .phi-item p { font-size: 0.8rem; color: var(--text-light); text-align: justify; }
+
+        /* 3. 课程 (Curriculum) */
+        .course-row { display: grid; grid-template-columns: 1.1fr 1fr; gap: 70px; align-items: center; margin-bottom: 80px; }
+        .course-info h3 { font-size: 1.2rem; margin-bottom: 15px; font-family: 'Noto Serif SC'; }
+        .course-info p { font-size: 0.8rem; color: var(--text-light); }
+        .course-img { background: #f8fafc; aspect-ratio: 16/10; overflow: hidden; border: 1px solid var(--border-soft); }
+        .course-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+
+        /* 4. 导师 (Mentor) - 填入您的图片 */
+        .mentor-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .mentor-card { text-align: left; }
+        .mentor-photo-wrap { 
+            width: 100%; aspect-ratio: 3/4; background: #f1f5f9; 
+            margin-bottom: 15px; overflow: hidden; border: 1px solid var(--border-soft);
+        }
+        .mentor-photo-wrap img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            filter: contrast(1.02); transition: 0.6s ease;
+        }
+        .mentor-card:hover img { transform: scale(1.03); }
+        .mentor-card h4 { font-size: 0.85rem; margin-bottom: 4px; font-weight: 600; }
+        .mentor-card p { font-size: 0.7rem; color: var(--text-light); letter-spacing: 0.5px; }
+
+        /* 5. 方法论 (Method) */
+        .method-item { display: flex; padding: 40px 0; border-top: 1px solid var(--border-soft); }
+        .method-num { font-size: 0.7rem; font-weight: 600; width: 100px; color: var(--accent-blue); }
+        .method-text h4 { font-size: 0.95rem; margin-bottom: 10px; }
+        .method-text p { font-size: 0.8rem; color: var(--text-light); max-width: 600px; }
+
+        /* 6. 空间 (Campus) */
+        .campus-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .campus-box { height: 180px; background: #f8fafc; border: 1px solid var(--border-soft); }
+
+        /* 7. 数据 (Results) */
+        #results { background: #1e293b; color: white; padding: 80px 0; }
+        .res-grid { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+        .res-box h4 { font-size: 1.8rem; font-weight: 300; margin-bottom: 8px; }
+        .res-box p { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.6; }
+
+        /* 8. 申请 (Form) */
+        .form-container { max-width: 500px; margin: 0 auto; }
+        input, select, textarea { 
+            width: 100%; padding: 12px; border: 1px solid var(--border-soft); 
+            background: transparent; font-family: inherit; font-size: 0.75rem; 
+            margin-bottom: 15px; outline: none;
+        }
+        .submit-btn { 
+            width: 100%; padding: 15px; background: var(--primary-ink); 
+            color: white; border: none; font-size: 0.7rem; letter-spacing: 3px; 
+            cursor: pointer; transition: 0.3s;
+        }
+        .submit-btn:hover { background: #334155; }
+
+        footer { padding: 60px 0; text-align: center; font-size: 0.65rem; color: var(--text-light); border-top: 1px solid var(--border-soft); }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .phi-grid, .mentor-grid, .course-row, .res-grid { grid-template-columns: 1fr; gap: 30px; }
+            .hero-content h1 { font-size: 2.2rem; }
+            html { font-size: 14px; }
+            section { padding: 70px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="#" class="logo">CJW ACADEMY</a>
+            <div class="nav-links">
+                <a href="#philosophy">理念</a>
+                <a href="#courses">课程</a>
+                <a href="#faculty">导师</a>
+                <a href="#method">方法</a>
+                <a href="#apply">申请</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. HERO -->
+    <header id="hero">
+        <div class="container hero-content">
+            <span>CJW Education Group</span>
+            <h1>趁势而动，<br>截获文字的深层逻辑</h1>
+            <p>我们不教授平庸的堆砌，我们只拆解高级的秩序。在信息爆炸的时代，带你通过“截击式”思维重塑文字的绝对影响力。</p>
+            <a href="#apply" class="btn-ghost">咨询入学测评</a>
+        </div>
+    </header>
+
+    <!-- 2. PHILOSOPHY -->
+    <section id="philosophy">
+        <div class="container">
+            <div class="section-header">
+                <span>The Core Philosophy</span>
+                <h2>品牌哲学体系</h2>
+            </div>
+            <div class="phi-grid">
+                <div class="phi-item">
+                    <h3>[ 趁 ] · 势能捕捉</h3>
+                    <p>教导学员捕捉社会情绪与时代逻辑的微小波动，将灵感转化为具有爆发力的叙事支点。</p>
+                </div>
+                <div class="phi-item">
+                    <h3>[ 截 ] · 秩序截断</h3>
+                    <p>强制剥离冗余信息。通过独创的“逻辑截流术”，让表达呈现出如手术刀般的精准与力量感。</p>
+                </div>
+                <div class="phi-item">
+                    <h3>[ 文 ] · 审美重构</h3>
+                    <p>回归文学的智性美。不只是提分，更是培养一种能够洞察事物本质的高级文字人格。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CURRICULUM -->
+    <section id="courses">
+        <div class="container">
+            <div class="section-header">
+                <span>Programs</span>
+                <h2>金牌课程模块</h2>
+            </div>
+            <div class="course-row">
+                <div class="course-img"><img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="course-info">
+                    <h3>高阶考场文法截击室</h3>
+                    <p>针对高端应试，解析顶级试卷的底层逻辑。教你如何在45分钟内，通过精准的结构截取，完成从平庸到惊艳的质变。</p>
+                </div>
+            </div>
+            <div class="course-row" style="direction: rtl;">
+                <div class="course-img"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&q=80&w=800"></div>
+                <div class="course-info" style="direction: ltr;">
+                    <h3>趁势文学·商业表达逻辑</h3>
+                    <p>将古典文学的张力引入现代职场与商业沟通。教导未来领袖如何通过文字进行战略性的说服与立场构建。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FACULTY - 本地图片已填入 -->
+    <section id="faculty">
+        <div class="container">
+            <div class="section-header">
+                <span>The Faculty</span>
+                <h2>首席导师矩阵</h2>
+            </div>
+            <div class="mentor-grid">
+                <!-- 导师 1 -->
+                <div class="mentor-card">
+                    <div class="mentor-photo-wrap">
+                        <img src="陈截文院长.jpg" alt="陈截文院长">
+                    </div>
+                    <h4>陈截文 院长</h4>
+                    <p>CJW系统创始人 / 首席逻辑架构师</p>
+                </div>
+                <!-- 导师 2 -->
+                <div class="mentor-card">
+                    <div class="mentor-photo-wrap">
+                        <img src="Dr.Julian.jpg" alt="Dr.Julian">
+                    </div>
+                    <h4>Dr. Julian</h4>
+                    <p>牛津大学访问学者 / 语言学博士</p>
+                </div>
+                <!-- 导师 3 -->
+                <div class="mentor-card">
+                    <div class="mentor-photo-wrap">
+                        <img src="宋清教授.jpg" alt="宋清教授">
+                    </div>
+                    <h4>宋清 教授</h4>
+                    <p>国家级文学评审 / 叙事美学专家</p>
+                </div>
+                <!-- 导师 4 -->
+                <div class="mentor-card">
+                    <div class="mentor-photo-wrap">
+                        <img src="林若溪女士.jpg" alt="林若溪女士">
+                    </div>
+                    <h4>林若溪 女士</h4>
+                    <p>资深传媒策展人 / 创意写作导师</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. METHODOLOGY -->
+    <section id="method">
+        <div class="container">
+            <div class="section-header">
+                <span>Methodology</span>
+                <h2>A.I.R 学习法</h2>
+            </div>
+            <div class="method-item">
+                <div class="method-num">PHASE 01</div>
+                <div class="method-text">
+                    <h4>Acquisition (深度摄取)</h4>
+                    <p>趁势捕捉语境中的高价值信息，建立个人文学数据库。</p>
+                </div>
+            </div>
+            <div class="method-item">
+                <div class="method-num">PHASE 02</div>
+                <div class="method-text">
+                    <h4>Interception (逻辑截击)</h4>
+                    <p>剥离冗余叙述，通过截断式思维建立不可撼动的文字骨架。</p>
+                </div>
+            </div>
+            <div class="method-item">
+                <div class="method-num">PHASE 03</div>
+                <div class="method-text">
+                    <h4>Refinement (文风淬炼)</h4>
+                    <p>微米级的修辞打磨，让最终产出具备艺术级的质感。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CAMPUS -->
+    <section id="campus">
+        <div class="container">
+            <div class="section-header">
+                <span>The Space</span>
+                <h2>沉浸式教学空间</h2>
+            </div>
+            <div class="campus-grid">
+                <div class="campus-box"></div>
+                <div class="campus-box" style="background: #edf2f7;"></div>
+                <div class="campus-box"></div>
+                <div class="campus-box" style="background: #edf2f7;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. RESULTS -->
+    <section id="results">
+        <div class="container res-grid">
+            <div class="res-box">
+                <h4>96%</h4>
+                <p>精英学员逻辑跃迁</p>
+            </div>
+            <div class="res-box">
+                <h4>1:4</h4>
+                <p>研讨导师配比</p>
+            </div>
+            <div class="res-box">
+                <h4>22</h4>
+                <p>年度学术金奖</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. APPLY -->
+    <section id="apply">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <span>Registration</span>
+                <h2>入学申请申请表</h2>
+            </div>
+            <div class="form-container">
+                <form>
+                    <input type="text" placeholder="姓名">
+                    <input type="text" placeholder="联系电话">
+                    <select>
+                        <option>意向方向：逻辑应试</option>
+                        <option>意向方向：文学创作</option>
+                        <option>意向方向：商业说服</option>
+                    </select>
+                    <textarea rows="4" placeholder="请简述您的提升需求..."></textarea>
+                    <button type="button" class="submit-btn">提交申请 · 发送评估书</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>CJW ACADEMY © 2025 趁截文辅导班 | THE ORDER OF LITERATURE</p>
+        <p style="margin-top: 10px; opacity: 0.5;">做最有态度的文学教育 | 虚拟校区 秩序大厦 12F</p>
+    </footer>
+
+</body>
+</html>
